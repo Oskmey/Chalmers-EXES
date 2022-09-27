@@ -1,0 +1,48 @@
+# package exercises
+
+# Pig Latin, silly secret language
+# https://en.wikipedia.org/wiki/Pig_Latin
+#
+# See:
+# - UseString
+def pig_latin_program():
+    str_to_translate = input("Text to translate? >")
+    to_pig_latin(str_to_translate, constants_list)
+
+constants_list = ["b", "c", "d", "f", "g", "h", "j", "k", "l", "m", "n", "p", "q", "r", "s", "t", "v", "w", "x", "y", "z", "å", "ä", "ö"]
+# ---------- Methods --------------------
+# T
+def to_pig_latin(str_to_translate, constants_list) -> str:
+    get_first_letter_action(str_to_translate, constants_list)
+    
+
+def get_first_letter_action(str_to_translate: str, constants_list: list[str]):
+    str_without_begining_spaces = str_to_translate.strip()
+    words: str = str_without_begining_spaces.split()
+    for i in range(len(words)):
+        the_word = words[i]
+        reached_vowel = False
+        list_of_constants = []
+        new_latin_word = []
+        for letter in the_word:
+            if letter not in constants_list: 
+                reached_vowel = True
+            if not reached_vowel:
+                list_of_constants.append(letter)
+            else:
+                new_latin_word.append(letter)
+                pig_latin_word = new_latin_word + list_of_constants + ["ay"]
+                pig_latin_word = "".join(pig_latin_word)
+        print(pig_latin_word)
+            
+
+            
+
+def test():
+    print(to_pig_latin("My name is Eric") == "yMay amenay isway Ericway")
+
+
+
+
+if __name__ == "__main__":
+    pig_latin_program()
