@@ -1,0 +1,34 @@
+# package exercises
+
+# Pig Latin, silly secret language
+# https://en.wikipedia.org/wiki/Pig_Latin
+#
+# See:
+# - UseString
+def pig_latin_program():
+    str_to_translate = input("Text to translate? >")
+    to_pig_latin(str_to_translate, constants_list)
+
+constants_list =["bcdfghjklmnpqrstvwxyzåäö"]
+# ---------- Methods --------------------
+# T
+def to_pig_latin(str_to_translate, constants_list) -> str:
+    check_first_letter(str_to_translate, constants_list)
+    
+
+def check_first_letter(str_to_translate: str, constants_list: list[str]):
+    str_without_begining_spaces = str_to_translate.strip()
+    words: str = str_without_begining_spaces.split()
+    for i in range(len(words)):
+        the_word = words[i]
+        if  the_word[0] in constants_list:
+            print("lol")
+
+def test():
+    print(to_pig_latin("My name is Eric") == "yMay amenay isway Ericway")
+
+
+
+
+if __name__ == "__main__":
+    pig_latin_program()
