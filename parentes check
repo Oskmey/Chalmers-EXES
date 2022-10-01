@@ -1,0 +1,62 @@
+# package exercises
+from samples.Stack import *
+
+# Use a Stack to check parentheses (balanced and correct nesting)
+# The parentheses are: (), [] and {}
+#
+# See:
+# - UseAStack
+# - UseString
+# - SwitchStatement
+def check_paren_program():
+    # All should be true
+    print(check_parentheses("()"))
+    print(check_parentheses("(()())"))
+    print(not check_parentheses("(()))"))  # Unbalanced
+    print(not check_parentheses("((())"))  # Unbalanced
+
+    print(check_parentheses("({})"))
+    print(not check_parentheses("({)}"))  # Bad nesting
+    print(check_parentheses("({} [()] ({}))"))
+    print(not check_parentheses("({} [() ({)})"))  # Unbalanced and bad nesting
+
+
+# ----------- Methods -------------------------
+def check_parentheses(string):
+    stack_of_open = Stack()
+    return check_parens_with_stack(string, stack_of_open)
+
+def check_parens_with_stack(string, stack_of_open):
+    i = 0
+    string = string.replace(" ","")
+    opener_parentheses = ["(", "[", "{"]
+    closer_parentheses = [")", "]", "}"]
+    if string == "":
+        return stack_of_open.is_empty()
+    current_parentheses = string[i]
+    if current_parentheses in opener_parentheses:
+        stack_of_open.push(current_parentheses)
+        return check_parens_with_stack(string[1:], stack_of_open)
+    elif current_parentheses in closer_parentheses and not stack_of_open.head is None:
+        opener_parentheses = stack_of_open.pop()
+        if matching(opener_parentheses) == current_parentheses:
+            return check_parens_with_stack(string[1:], stack_of_open)
+    else:
+        return False
+
+
+
+def matching(string):
+    paren_switcher = {
+        '(': ')',
+        '[': ']',
+        '{': '}'
+    }
+    match = paren_switcher.get(string)
+    if match is None:
+        raise ValueError
+    return match
+
+
+if __name__ == "__main__":
+    check_paren_program()
