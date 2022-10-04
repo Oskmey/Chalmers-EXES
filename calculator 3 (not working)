@@ -118,6 +118,7 @@ def slicer (expr):
     sliced = []
     numbers = ""
     op_list = ["*", "/", "+", "-", "^", "(", ")"]
+    expr = expr.replace(" ","")
     for elem in expr:
         if elem not in op_list:
             numbers += elem
